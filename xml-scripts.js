@@ -259,7 +259,6 @@ $(document).ready(function() {
                 $('#courses-result-number').text(`${coursesSum == 1 ? '1 video': coursesSum + ' videos'}`);
                 $("#courses-result-container").empty();
 
-
                 $.each($(xml).find('courses').find('course'), function(i, el) {
                     let stars = [];
                     for (let j = 0; j < $(this).attr('star'); j++) {
