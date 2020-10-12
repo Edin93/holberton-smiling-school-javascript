@@ -16,6 +16,7 @@ $(document).ready(function() {
         },
         success: function(response) {
             let data = response;
+            console.log(data);
             $('#quotes-loader').hide();
             for (let i = 0; i < data.length; i++) {
                 let $html = (`
