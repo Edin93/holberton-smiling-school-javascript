@@ -16,7 +16,6 @@ $(document).ready(function() {
         },
         success: function(response) {
             let data = response;
-            console.log(data);
             $('#quotes-loader').hide();
             for (let i = 0; i < data.length; i++) {
                 let $html = (`
@@ -56,9 +55,19 @@ $(document).ready(function() {
         },
         success: function(response) {
             let data = response;
-            console.log(data);
             $('#tutorials-loader').hide();
             for (let i = 0; i < data.length; i++) {
+                let stars = [];
+                for (let j = 0; j < data[i].star; j++) {
+                    stars.push(`
+                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
+                    `)
+                }
+                for (let j = data[i].star; j < 5; j++) {
+                    stars.push(`
+                    <img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey">
+                    `)
+                }
                 let $html = (`
                 <div class="text-center col-12 col-sm-6 col-md-3">
                     <div class="carousel-item active">
@@ -79,11 +88,7 @@ $(document).ready(function() {
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex pt-1">
-                                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                    <img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey">
+                                ${stars.map(star => star)}
                                 </div>
                                 <div class="purple-text font-weight-bold">
                                     ${data[i].duration}
@@ -117,9 +122,19 @@ $(document).ready(function() {
         },
         success: function(response) {
             let data = response;
-            console.log(data);
             $('#latest-videos-loader').hide();
             for (let i = 0; i < data.length; i++) {
+                let stars = [];
+                for (let j = 0; j < data[i].star; j++) {
+                    stars.push(`
+                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
+                    `)
+                }
+                for (let j = data[i].star; j < 5; j++) {
+                    stars.push(`
+                    <img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey">
+                    `)
+                }
                 let $html = (`
                 <div class="text-center col-12 col-sm-6 col-md-3">
                     <div class="carousel-item active">
@@ -140,11 +155,7 @@ $(document).ready(function() {
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex pt-1">
-                                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                    <img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey">
+                                ${stars.map(star => star)}
                                 </div>
                                 <div class="purple-text font-weight-bold">
                                     ${data[i].duration}
@@ -161,4 +172,88 @@ $(document).ready(function() {
             console.log(`An error occured`);
         }
     });
+
+    // Courses page filtering
+    let coursesURL = 'https://smileschool-api.hbtn.info/courses';
+    let $qVal = $('.user_search').val();
+    let $topicVal = '';
+    let $sortVal = '';
+
+    $('#topic-menu button').click(function(e) {
+        $topicVal = e.target.getAttribute('data-value');
+        $('#topic-menu-container').text(e.target.textContent);
+        getCourses($qVal, $topicVal, $sortVal);
+    });
+
+
+    // GET COURSES FUNCTION
+    function getCourses($qVal, $topicVal, $sortVal) {
+        $.ajax({
+            url: coursesURL,
+            type: 'GET',
+            dataType: 'json',
+            data: {
+                action: 'query',
+                list: 'search',
+                format: 'json',
+                q: $qVal,
+                topic: $topicVal,
+                sort: $sortVal,
+            },
+            beforeSend: function() {
+                $('#courses-loader').show();
+            },
+            success: function(response) {
+                let data = response;
+                console.log(data);
+                $('#courses-loader').hide();
+                $('#courses-result-number').text(`${data.courses.length == 1 ? '1 video': data.courses.length + ' videos'}`);
+                for (let i = 0; i < data.length; i++) {
+                    let stars = [];
+                    for (let j = 0; j < data[i].star; j++) {
+                        stars.push(`
+                        <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
+                        `)
+                    }
+                    for (let j = data[i].star; j < 5; j++) {
+                        stars.push(`
+                        <img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey">
+                        `)
+                    }
+                    let $html = (`
+                    <div class="text-center col-12 col-sm-4 col-md-3 mb-5">
+                        <div class="carousel-item active">
+                            <img class="w-100" src="./images/thumbnail_4.jpg" alt="smile image">
+                            <div class="mx-3">
+                                <div class="font-weight-bold text-dark text-left mt-3">
+                                    Diagonal Smile
+                                </div>
+                                <div class="text-secondary text-left mt-3 mb-3">
+                                    Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod.
+                                </div>
+                                <div class="d-flex align-items-center mb-3">
+                                    <img src="./images/profile_4.jpg" class="rounded-circle mr-3 video-carousel-img-profile" alt="profile image">
+                                    <div class="purple-text font-weight-bold">Phillip massey</div>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex pt-1">
+                                        ${stars.map(star => star)}
+                                    </div>
+                                    <div class="purple-text font-weight-bold">
+                                        8 min
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `);
+                    $("#courses-result-container").append($html);
+                }
+            },
+            error: function(xhr, status) {
+                console.log(`An error occured`);
+            }
+        });
+    }
+
 });
