@@ -182,52 +182,6 @@ $(document).ready(function() {
     let $topicVal = 'all';
     let $sortVal = 'most_popular';
 
-    function coursesHTML() {
-        $.ajax({
-            url: coursesURL,
-            type: 'GET',
-            dataType: 'json',
-            data: {
-                action: 'query',
-                list: 'search',
-                format: 'json',
-                q: $qVal,
-                topic: $topicVal,
-                sort: $sortVal,
-            },
-            success: function(response) {
-                let data = response;
-                let topics = data.topics;
-                let sorts = data.sorts;
-                for (let i = 0; i < topics.length; i++) {
-                    let topicName = topics[i][0].toUpperCase() + topics[i].substring(1);
-                    let $btn = $(`<button data-value=${topics[i]} class="dropdown-item" type="button">${topicName}</button>`);
-                    $btn.click(function(e) {
-                        $topicVal = e.target.getAttribute('data-value');
-                        $('#topic-menu-container').text(e.target.textContent);
-                        getCourses($qVal, $topicVal, $sortVal);
-                    });
-                    $('#topic-menu').append($btn);
-                }
-                for (let i = 0; i < sorts.length; i++) {
-                    let sortName = sorts[i][0].toUpperCase() + sorts[i].substr(1,3) + ' ' + sorts[i].substr(5, 1).toUpperCase() + sorts[i].substr(6);
-                    let $btn = $(`<button data-value=${sorts[i]} class="dropdown-item" type="button">${sortName}</button>`);
-                    $btn.click(function(e) {
-                        $sortVal = e.target.getAttribute('data-value');
-                        $('#sorting-menu-container').text(e.target.textContent);
-                        getCourses($qVal, $topicVal, $sortVal);
-                    });
-                    $('#sorting-menu').append($btn);
-                }
-            },
-            error: function(xhr, status) {
-                console.log(`An error occured`);
-            }
-        });
-    }
-
-    coursesHTML();
-
     // Handle keywords search change
     $('#user_search').on('input', function(e) {
         $qVal = e.target.value;
@@ -236,6 +190,19 @@ $(document).ready(function() {
         }, 500);
     });
 
+    // Handle TOPIC filter change
+    $('#topic-menu button').click(function(e) {
+        $topicVal = e.target.getAttribute('data-value');
+        $('#topic-menu-container').text(e.target.textContent);
+        getCourses($qVal, $topicVal, $sortVal);
+    });
+
+    // Handle SORT BY filter change
+    $('#sorting-menu button').click(function(e) {
+        $sortVal = e.target.getAttribute('data-value');
+        $('#sorting-menu-container').text(e.target.textContent);
+        getCourses($qVal, $topicVal, $sortVal);
+    });
     
     // GET COURSES FUNCTION
     function getCourses($qVal, $topicVal, $sortVal) {
@@ -257,6 +224,7 @@ $(document).ready(function() {
             success: function(response) {
                 let data = response;
                 let courses = data.courses;
+                console.log(data);
                 $('#courses-loader').hide();
                 $('#courses-result-number').text(`${courses.length == 1 ? '1 video': courses.length + ' videos'}`);
                 $("#courses-result-container").empty();
