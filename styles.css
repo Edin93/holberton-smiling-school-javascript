@@ -311,6 +311,20 @@ main.courses-main .hero-section {
   flex-basis: 50% !important;
 }
 
+.tutorial-video-top {
+  position: relative;
+}
+
+.video-play-img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 45px;
+  width: 45px;
+  transform: translate(-50%,-50%);
+}
+
+
 /* FREE MEMBERSHIP SECTION */
 
 .free-membership-section {
