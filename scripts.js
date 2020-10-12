@@ -1,5 +1,8 @@
 $(document).ready(function() {
 
+    // to hide the courses-loader on courses page launch.
+    $('#courses-loader').hide();
+
     // Loading quotes
     let quotesURL = 'https://smileschool-api.hbtn.info/quotes';
     $.ajax({
@@ -60,7 +63,7 @@ $(document).ready(function() {
                 let stars = [];
                 for (let j = 0; j < data[i].star; j++) {
                     stars.push(`
-                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
+                    <img src="./images/star_on.png" class="carousel-star-icon" alt="star icon filled in purple">
                     `)
                 }
                 for (let j = data[i].star; j < 5; j++) {
@@ -127,7 +130,7 @@ $(document).ready(function() {
                 let stars = [];
                 for (let j = 0; j < data[i].star; j++) {
                     stars.push(`
-                    <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
+                    <img src="./images/star_on.png" class="carousel-star-icon" alt="star icon filled in purple">
                     `)
                 }
                 for (let j = data[i].star; j < 5; j++) {
@@ -176,16 +179,31 @@ $(document).ready(function() {
     // Courses page filtering
     let coursesURL = 'https://smileschool-api.hbtn.info/courses';
     let $qVal = $('.user_search').val();
-    let $topicVal = '';
-    let $sortVal = '';
+    let $topicVal = 'all';
+    let $sortVal = 'most_popular';
 
+    // Handle keywords search change
+    $('#user_search').on('input', function(e) {
+        $qVal = e.target.value;
+        setTimeout(function() {
+            getCourses($qVal, $topicVal, $sortVal);
+        }, 500);
+    });
+
+    // Handle TOPIC filter change
     $('#topic-menu button').click(function(e) {
         $topicVal = e.target.getAttribute('data-value');
         $('#topic-menu-container').text(e.target.textContent);
         getCourses($qVal, $topicVal, $sortVal);
     });
 
-
+    // Handle SORT BY filter change
+    $('#sorting-menu button').click(function(e) {
+        $sortVal = e.target.getAttribute('data-value');
+        $('#sorting-menu-container').text(e.target.textContent);
+        getCourses($qVal, $topicVal, $sortVal);
+    });
+    
     // GET COURSES FUNCTION
     function getCourses($qVal, $topicVal, $sortVal) {
         $.ajax({
@@ -205,17 +223,20 @@ $(document).ready(function() {
             },
             success: function(response) {
                 let data = response;
+                let courses = data.courses;
                 console.log(data);
                 $('#courses-loader').hide();
-                $('#courses-result-number').text(`${data.courses.length == 1 ? '1 video': data.courses.length + ' videos'}`);
-                for (let i = 0; i < data.length; i++) {
+                $('#courses-result-number').text(`${courses.length == 1 ? '1 video': courses.length + ' videos'}`);
+                $("#courses-result-container").empty();
+                for (let i = 0; i < courses.length; i++) {
+                    let course = courses[i];
                     let stars = [];
-                    for (let j = 0; j < data[i].star; j++) {
+                    for (let j = 0; j < course.star; j++) {
                         stars.push(`
-                        <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
+                        <img src="./images/star_on.png" class="carousel-star-icon" alt="star icon filled in purple">
                         `)
                     }
-                    for (let j = data[i].star; j < 5; j++) {
+                    for (let j = course.star; j < 5; j++) {
                         stars.push(`
                         <img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey">
                         `)
@@ -223,24 +244,24 @@ $(document).ready(function() {
                     let $html = (`
                     <div class="text-center col-12 col-sm-4 col-md-3 mb-5">
                         <div class="carousel-item active">
-                            <img class="w-100" src="./images/thumbnail_4.jpg" alt="smile image">
-                            <div class="mx-3">
+                            <img class="w-100" src=${course.thumb_url} alt="smile image">
+                            <div class="mx-2">
                                 <div class="font-weight-bold text-dark text-left mt-3">
-                                    Diagonal Smile
+                                    ${course.title}
                                 </div>
                                 <div class="text-secondary text-left mt-3 mb-3">
-                                    Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod.
+                                    ${course['sub-title']}
                                 </div>
                                 <div class="d-flex align-items-center mb-3">
-                                    <img src="./images/profile_4.jpg" class="rounded-circle mr-3 video-carousel-img-profile" alt="profile image">
-                                    <div class="purple-text font-weight-bold">Phillip massey</div>
+                                    <img src=${course.author_pic_url} class="rounded-circle mr-3 video-carousel-img-profile" alt="profile image">
+                                    <div class="purple-text font-weight-bold">${course.author}</div>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex pt-1">
                                         ${stars.map(star => star)}
                                     </div>
                                     <div class="purple-text font-weight-bold">
-                                        8 min
+                                        ${course.duration}
                                     </div>
                                 </div>
                             </div>

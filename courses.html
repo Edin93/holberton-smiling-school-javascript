@@ -48,24 +48,6 @@
                     </div>
 
 
-                    <!-- <div class="col-12 col-sm-6 col-md-4 mt-3">
-                        <label class="mb-2">TOPIC</label>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary border-0 rounded-0 search-element w-100 text-left" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                All
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <button class="dropdown-item" type="button">All</button>
-                            <button class="dropdown-item" type="button">Novice</button>
-                            <button class="dropdown-item" type="button">Intermediate</button>
-                            <button class="dropdown-item" type="button">Expert</button>
-                            </div>
-                        </div>
-                    </div> -->
-
-
-
-
                     <div class="col-12 col-sm-6 col-md-4 mt-3">
                         <label class="mb-2">TOPIC</label>
                         <div class="dropdown">
@@ -82,21 +64,20 @@
                     </div>
 
 
-
-
                     <div class="col-12 col-sm-6 col-md-4 mt-3">
                         <label class="mb-2">SORT BY</label>
                         <div class="dropdown">
-                            <button class="btn btn-secondary border-0 rounded-0 search-element w-100 text-left" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-secondary border-0 rounded-0 search-element w-100 text-left" type="button" id="sorting-menu-container" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Most Popular
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <button class="dropdown-item" type="button">Most Popular</button>
-                            <button class="dropdown-item" type="button">Most Recent</button>
-                            <button class="dropdown-item" type="button">Most Viewed</button>
+                            <div class="dropdown-menu" id="sorting-menu" aria-labelledby="sorting-menu-container">
+                                <button data-value="most_popular" class="dropdown-item" type="button">Most Popular</button>
+                                <button data-value="most_recent" class="dropdown-item" type="button">Most Recent</button>
+                                <button data-value="most_viewed" class="dropdown-item" type="button">Most Viewed</button>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <!-- SEARCH SECTION -->
@@ -108,37 +89,6 @@
                     <div class="mb-5 text-secondary ml-3" id="courses-result-number"></div>
                     <div class="loader" id="courses-loader"></div>
                     <div class="d-flex flex-wrap" id="courses-result-container">
-                        <!-- cells start -->
-                        <!-- <div class="text-center col-12 col-sm-4 col-md-3 mb-5">
-                            <div class="carousel-item active">
-                                <img class="w-100" src="./images/thumbnail_4.jpg" alt="smile image">
-                                <div class="mx-3">
-                                    <div class="font-weight-bold text-dark text-left mt-3">
-                                        Diagonal Smile
-                                    </div>
-                                    <div class="text-secondary text-left mt-3 mb-3">
-                                        Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod.
-                                    </div>
-                                    <div class="d-flex align-items-center mb-3">
-                                        <img src="./images/profile_4.jpg" class="rounded-circle mr-3 video-carousel-img-profile" alt="profile image">
-                                        <div class="purple-text font-weight-bold">Phillip massey</div>
-                                    </div>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex pt-1">
-                                            <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                            <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                            <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                            <img src="./images/star_on.png" class="mr-1 carousel-star-icon" alt="star icon filled in purple">
-                                            <img src="./images/star_off.png" class="carousel-star-icon" alt="star icon filled in grey">
-                                        </div>
-                                        <div class="purple-text font-weight-bold">
-                                            8 min
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- cell end -->
                     </div>
                 </div>
             </section>
