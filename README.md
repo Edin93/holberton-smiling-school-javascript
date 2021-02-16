@@ -1,9 +1,26 @@
 # holberton-smiling-school
+
+## Author Description
+* I'm a software engineering student at Holberton School, with 2 years of experience in Javascript web technologies.
+* I'm mostly confident with JavaScript (MERN Stack) and Python and I'm looking for a full time software engineering job.
+* You can reach me out on:
+	- [Twitter](https://twitter.com/h_edin93)
+	- [LinkedIn](https://www.linkedin.com/in/houssem-eddine-ben-khalifa-b0a2a412b/)
+	- [Email](mailto:il_matador@hotmail.fr)
+
+## Project Description
 * This is a fullstack web specialization project at Holberton school.
 * The goal of this project is a implement a Figma design template in HTML, CSS and Bootstrap
 * The project has no guiding instructions.
 * There are 3 page to implement.
 * There are 3 different layout (desktop, tablet and mobile) for each page.
+
+## Technologies and Concepts
+- HTML.
+- CSS.
+- Bootstrap.
+- Javascript & Jquery.
+- Responsive design for web, tablet and mobile.
 
 ## Requirements
 * We have to use Bootstrap.
