@@ -22,6 +22,14 @@
 - Javascript & Jquery.
 - Responsive design for web, tablet and mobile.
 
+## Features
+* All the required features for this project are implemented.
+
+## Challenges
+* The most challenging part is the responsive design part.
+* How to write good reusable CSS classes.
+* How to make a clean HTML structure.
+
 ## Usage and Installation
 - There's no installation needed to use this project. You just have to download the zip file of the project or clone the project and open it on the browser.
 
