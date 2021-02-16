@@ -22,6 +22,12 @@
 - Javascript & Jquery.
 - Responsive design for web, tablet and mobile.
 
+## Usage and Installation
+- There's no installation needed to use this project. You just have to download the zip file of the project or clone the project and open it on the browser.
+
+## Clone
+`git clone https://github.com/Edin93/holberton-smiling-school-javascript.git`
+
 ## Requirements
 * We have to use Bootstrap.
 * Our styles.css must be as small as you can - we must use as much as we can Bootstrap classes.
